@@ -4,6 +4,18 @@ const transform = function(existingConfig, pluggableConfig) {
   const idx = existingConfig.module.loaders.findIndex(
     x => x.test ? x.test.toString() === '/\\.css$/' : false
   );
+  const urlIdx = existingConfig.module.loaders.findIndex(
+    x => x.loader ? x.loader.toString() === 'url' : false
+  );
+
+  const urlRules = newConfig.module.loaders[urlIdx]
+    ? newConfig.module.loaders[urlIdx]
+    : undefined;
+    
+  if (urlRules) {
+    urlRules.exclude.push(/\.s[ca]ss$/);
+    newConfig.module.loaders[urlIdx] = urlRules;
+  }
 
   const cssRules = idx ? newConfig.module.loaders[idx] : undefined;
 
