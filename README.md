@@ -3,7 +3,7 @@
 _This is still in alpha._
 
 This is simply a template module wrapper for
-[perrigon](https://www.npmjs.com/~peerigon)s
+[perrigons](https://www.npmjs.com/~peerigon)
 [sass-loader](https://www.npmjs.com/package/sass-loader)
 
 This plugin is designed to work with applications generated from the awesome
