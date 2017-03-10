@@ -21,7 +21,12 @@ const transform = function(existingConfig, pluggableConfig) {
 
   if (cssRules) {
     cssRules.test = /s?[ca]ss$/;
-    cssRules.loader = cssRules.loader.replace('!postcss', '!postcss!sass');
+    if (cssRules.loader) {
+      cssRules.loader = cssRules.loader.replace('!postcss', '!postcss!sass');
+    }
+    if (cssRules.loaders) {
+      cssRules.loaders.push(require.resolve('postcss-loader'));
+    }
     if (pluggableConfig) {
       newConfig.module.sassLoader = pluggableConfig.options;
     }
