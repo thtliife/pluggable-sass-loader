@@ -1,9 +1,11 @@
 const transform = function(existingConfig, pluggableConfig) {
   const newConfig = existingConfig;
-
-  const idx = existingConfig.module.loaders.findIndex(
-    x => x.test ? x.test.toString() === '/\\.css$/' : false
+  const cssStringTests = ['/\\.css$/', '/\\.css?$/']
+  
+  let idx = existingConfig.module.loaders.findIndex(
+    x => x.test ? cssStringTests.indexOf(x.test.toString()) !== -1 : false
   );
+  
   const urlIdx = existingConfig.module.loaders.findIndex(
     x => x.loader ? x.loader.toString() === 'url' : false
   );
@@ -25,7 +27,7 @@ const transform = function(existingConfig, pluggableConfig) {
       cssRules.loader = cssRules.loader.replace('!postcss', '!postcss!sass');
     }
     if (cssRules.loaders) {
-      cssRules.loaders.push(require.resolve('postcss-loader'));
+      cssRules.loaders.push(require.resolve('sass-loader'));
     }
     if (pluggableConfig) {
       newConfig.module.sassLoader = pluggableConfig.options;
