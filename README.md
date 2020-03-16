@@ -1,4 +1,4 @@
-# pluggable-ignore-plugin
+# pluggable-sass-loader
 
 _This is still in alpha._
 
